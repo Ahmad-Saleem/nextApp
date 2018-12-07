@@ -14,6 +14,12 @@ export default class KharetaApp extends App {
     return { pageProps }
   }
 
+  componentDidCatch (error, errorInfo) {
+    console.log('CUSTOM ERROR HANDLING', error)
+    // This is needed to render errors correctly in development / production
+    super.componentDidCatch(error, errorInfo)
+  }
+  
   render () {
 
     const { Component, pageProps } = this.props
