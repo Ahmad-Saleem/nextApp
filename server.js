@@ -9,9 +9,13 @@ const handle = app.getRequestHandler()
 app.prepare()
   .then(() => {
     const server = express()
-
+    console.log(' ###### SSR ###### ')
     server.get('/about/:x', (req, res) => {
       return app.render(req, res, '/about', {x: req.params.x})
+    })
+
+    server.get('/user/:op', (req, res) => {
+        return app.render(req, res, '/user', {op: req.params.op})
     })
 
     server.get('/b', (req, res) => {
