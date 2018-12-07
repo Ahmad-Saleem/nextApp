@@ -9,3 +9,7 @@ module.exports = withSass({
   }
 });
 
+// module.exports = {
+//     useFileSystemPublicRoutes: false
+// }
+

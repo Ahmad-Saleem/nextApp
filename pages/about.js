@@ -1,16 +1,20 @@
 import React from 'react';
 import Link from 'next/link';
+import { withRouter } from 'next/router';
 
-export default class extends React.Component {
+class About extends React.Component {
+
     render() {
-        console.log(this.props)
+        console.log('query:',  this.props.router.query)
       return (
         <div>
-          Hello World {this.props.userAgent},  
-          <Link href="/" prefetch>
+          About {this.props.query},  <br />
+          <Link href="/?from=about" as='/' prefetch>
               <a>home</a>
           </Link>
         </div>
       )
     }
   }
+
+export default withRouter(About);
