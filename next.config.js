@@ -13,3 +13,11 @@ module.exports = withSass({
 //     useFileSystemPublicRoutes: false
 // }
 
+module.exports = {
+    distDir: 'build'
+}
+
+module.exports = {
+    pageExtensions: ['jsx', 'js']
+}
+
