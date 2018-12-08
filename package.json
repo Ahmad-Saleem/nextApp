@@ -14,12 +14,15 @@
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
+    "aws-amplify": "^1.1.13",
+    "aws-amplify-react": "^2.1.7",
     "express": "^4.16.4",
     "next": "^7.0.2",
     "node-sass": "^4.10.0",
     "path-match": "^1.2.4",
     "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react-dom": "^16.6.3",
+    "styled-components": "^4.1.2"
   },
   "devDependencies": {
     "nodemon": "^1.18.7"
