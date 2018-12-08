@@ -1,6 +1,6 @@
 const express = require('express')
 const next = require('next')
-
+const routes = require('./routes')
 require('dotenv').config();
 
 const port = parseInt(process.env.PORT, 10) || 3000
@@ -11,18 +11,10 @@ const handle = app.getRequestHandler()
 app.prepare()
   .then(() => {
     const server = express()
-    console.log(' ###### SSR ###### ')
-    server.get('/about/:x', (req, res) => {
-      return app.render(req, res, '/about', {x: req.params.x})
-    })
 
-    server.get('/user/:op', (req, res) => {
-        return app.render(req, res, '/user', {op: req.params.op})
-    })
-
-    server.get('/b', (req, res) => {
-      return app.render(req, res, '/a', req.query)
-    })
+    routes.map(route =>  server.get(route.path, (req, res) => {
+        return app.render(req, res, route.page, req.params)
+    }))
 
     server.get('*', (req, res) => {
       return handle(req, res)

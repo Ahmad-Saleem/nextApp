@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import Link from '../../components/Link';
 
 export default class Signup extends React.Component {
 
@@ -7,8 +7,8 @@ export default class Signup extends React.Component {
         return(
             <div>
                 Signup <br />
-                <Link href='/user?op=login' as='/user/login'>
-                    <a> login  </a>
+                <Link page='user' params='login' query='?op=login'>
+                    login
                 </Link>
             </div>
         );
