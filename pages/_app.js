@@ -1,7 +1,11 @@
 import React from 'react'
 import App, { Container } from 'next/app'
+import { Provider } from "react-redux";
+import { configureStore } from "../store";
+
 import Layout from '../components/layouts/Layout';
 
+const store = configureStore();
 export default class KharetaApp extends App {
 
   static async getInitialProps({ Component, router, ctx }) {
@@ -26,9 +30,11 @@ export default class KharetaApp extends App {
 
     return (
       <Container>
+        <Provider store={store}>
           <Layout>
             <Component {...pageProps} />
           </Layout>
+        </Provider>
       </Container>
     )
   }
