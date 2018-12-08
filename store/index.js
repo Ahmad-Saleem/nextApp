@@ -5,7 +5,7 @@ import reduxThunk from 'redux-thunk';
 import rootReducer from './rootReducer';
 import { saveState, restoreState } from '../utils/session';
 
-require('dotenv').config();
+//require('dotenv').config();
 
 export const configureStore = () => {
 

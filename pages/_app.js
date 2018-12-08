@@ -3,10 +3,11 @@ import App, { Container } from 'next/app'
 import { Provider } from "react-redux";
 import { configureStore } from "../store";
 
+import withReduxStore from '../store/withReduxStore';
 import Layout from '../components/layouts/Layout';
 
 const store = configureStore();
-export default class KharetaApp extends App {
+class KharetaApp extends App {
 
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {}
@@ -39,3 +40,5 @@ export default class KharetaApp extends App {
     )
   }
 }
+
+export default withReduxStore(KharetaApp);
