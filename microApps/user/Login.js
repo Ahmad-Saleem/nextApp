@@ -1,9 +1,15 @@
 import React from 'react';
+import {connect} from "react-redux";
+import { bindActionCreators } from 'redux';
 import Link from '../../components/Link';
+import { userLogin } from './actions';
 
-export default class Login extends React.Component {
-
+class Login extends React.Component {
+    componentDidMount(){
+        this.props.userLogin('','');
+    }
     render(){
+        console.log(this.props)
         return(
             <div>
                 Login Form <br />
@@ -14,3 +20,12 @@ export default class Login extends React.Component {
         );
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators({ userLogin }, dispatch);
+}
+
+const mapStateToProps = ({user}) => {
+    return {user};
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

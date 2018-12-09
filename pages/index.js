@@ -1,23 +1,14 @@
-import React from 'react'
-import Link from 'next/link'
+import React from "react";
+import {connect} from "react-redux";
+import {setClientState } from '../store/persist';
 
-export default class Home extends React.Component {
-
-  static async getInitialProps({ req, query }) {
-    console.log('query:',  query)
-    const q = query || "";
-    const userAgent = req ? req.headers['user-agent'] : navigator.userAgent
-    return query
-  }
-
-  render() {
-    return (
-      <div>
-        Home Page {this.props.query},  <br />
-        <Link href="/about?x=1" as='/about/1' prefetch>
-            <a>here</a>
-        </Link>
-      </div>
-    )
-  }
-}
+export default connect(
+    (state) => state,
+    {setClientState}
+)(({fromServer, fromClient, setClientState}) => (
+    <div>
+        <div>fromServer: {fromServer}</div>
+        <div>fromClient: {fromClient}</div>
+        <div><button onClick={e => setClientState('bar')}>Set Client State</button></div>
+    </div>
+));

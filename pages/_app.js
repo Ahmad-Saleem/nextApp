@@ -1,44 +1,25 @@
-import React from 'react'
-import App, { Container } from 'next/app'
-import { Provider } from "react-redux";
-import { configureStore } from "../store";
+// pages/_app.js
+import React from "react";
+import {Provider} from "react-redux";
+import App, {Container} from "next/app";
+import withRedux from "next-redux-wrapper";
+import {makeStore} from "../store/persist";
+import {PersistGate} from 'redux-persist/integration/react';
 
-import withReduxStore from '../store/withReduxStore';
-import Layout from '../components/layouts/Layout';
+export default withRedux(makeStore, {debug: true})(class MyApp extends App {
 
-const store = configureStore();
-class KharetaApp extends App {
+    render() {
+        const {Component, pageProps, store} = this.props;
+        return (
+            <Container>
+                <Provider store={store}>
+                    <PersistGate persistor={store.__persistor} loading={<div>Loading</div>}>
+                        <Component {...pageProps} />
+                    </PersistGate>
+                </Provider>
+            </Container>
 
-  static async getInitialProps({ Component, router, ctx }) {
-    let pageProps = {}
-
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx)
+        );
     }
 
-    return { pageProps }
-  }
-
-  componentDidCatch (error, errorInfo) {
-    console.log('CUSTOM ERROR HANDLING', error)
-    // This is needed to render errors correctly in development / production
-    super.componentDidCatch(error, errorInfo)
-  }
-  
-  render () {
-
-    const { Component, pageProps } = this.props
-
-    return (
-      <Container>
-        <Provider store={store}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </Provider>
-      </Container>
-    )
-  }
-}
-
-export default withReduxStore(KharetaApp);
+});
