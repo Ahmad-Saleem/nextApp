@@ -1,12 +1,17 @@
 import React from 'react'
 import App, { Container } from 'next/app'
 import { Provider } from "react-redux";
+import withRedux from "next-redux-wrapper";
 import { configureStore } from "../store";
 
-import withReduxStore from '../store/withReduxStore';
+//import withReduxStore from '../store/withReduxStore';
 import Layout from '../components/layouts/Layout';
+import { saveState } from '../utils/session';
 
-const store = configureStore();
+const makeStore = (initialState, options) => {
+  return configureStore();
+};
+
 class KharetaApp extends App {
 
   static async getInitialProps({ Component, router, ctx }) {
@@ -19,6 +24,12 @@ class KharetaApp extends App {
     return { pageProps }
   }
 
+  componentWillUnmount(){
+    this.props.store.subscribe(()=> {
+      saveState(this.props.store.getState());
+    });
+  }
+
   componentDidCatch (error, errorInfo) {
     console.log('CUSTOM ERROR HANDLING', error)
     // This is needed to render errors correctly in development / production
@@ -27,7 +38,7 @@ class KharetaApp extends App {
   
   render () {
 
-    const { Component, pageProps } = this.props
+    const { Component, pageProps, store } = this.props
 
     return (
       <Container>
@@ -41,4 +52,4 @@ class KharetaApp extends App {
   }
 }
 
-export default withReduxStore(KharetaApp);
+export default withRedux(makeStore)(KharetaApp);

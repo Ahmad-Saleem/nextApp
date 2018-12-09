@@ -1,9 +1,10 @@
 import React from 'react';
 import Link from '../../components/Link';
-
-export default class Signup extends React.Component {
+import {connect} from 'react-redux';
+class Signup extends React.Component {
 
     render(){
+        console.log(this.props)
         return(
             <div>
                 Signup <br />
@@ -14,3 +15,7 @@ export default class Signup extends React.Component {
         );
     }
 }
+const mapStateToProps = ({user}) => {
+    return {user};
+}
+export default connect(mapStateToProps)(Signup);

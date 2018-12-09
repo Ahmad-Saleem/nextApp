@@ -20,7 +20,6 @@ const Signup = dynamic(
 
 
 class UserPage extends React.Component {
-
     render() {
         const { router: {query : { op }}} = this.props;
       return (

@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux';
+
+import {userReducer} from '../microApps/user/reducer'
 // import { userLogin } from '../microApps/login/reducer';
 // import { languageReducer } from '../languages/languageReducer';
 // import {adReducer} from '../microApps/adView/reducer';
@@ -6,6 +8,7 @@ import { combineReducers } from 'redux';
 // import { sharedReducer } from './sharedReducer';
 
 const rootReducer = combineReducers({
+  user: userReducer,
   // login: userLogin,
   // lang: languageReducer,
   // adView: adReducer,
